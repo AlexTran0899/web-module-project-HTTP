@@ -15,11 +15,7 @@ const EditMovieForm = (props) => {
 		metascore: 0,
 		description: ""
 	});
-	useEffect(()=>{
-		axios.get(`http://localhost:5000/api/movies/${id}`)
-		.then(res=>setMovie(res.data))
-	}, [])
-	
+
 	const handleChange = (e) => {
         setMovie({
             ...movie,
@@ -29,10 +25,10 @@ const EditMovieForm = (props) => {
 
     const handleSubmit = (e) => {
 		e.preventDefault();
-		axios.put(`http://localhost:5000/api/movies/${id}`, movie)
+		axios.post(`http://localhost:5000/api/movies`, movie)
 		.then(res =>{
 			props.setMovies(res.data)
-			push(`movies/edit/${id}`)
+            console.log("done")
 		})
 		.catch(err => console.log(err))
 
